@@ -1,9 +1,11 @@
-package com.ars.airlinereservationsystem.entity;
+package com.ars.airlinereservationsystem.model;
 
+import com.ars.airlinereservationsystem.model.util.FlightClass;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -28,13 +30,23 @@ public class Flight {
     private int economyClassSeats;
     @Column(name = "business_class_price")
     private double businessClassPrice;
-    @Column(name = "business_class_price")
+    @Column(name = "economy_class_price")
     private double economyClassPrice;
     @Enumerated(EnumType.STRING)
+    @Column(name = "flight_class")
     private FlightClass flightClass;
+
     @ManyToOne
     @JoinColumn(name = "airline_id")
     private Airline airline;
+
     @OneToOne(mappedBy = "flight")
     private CancelFlight cancelFlight;
+
+    @ManyToOne
+    @JoinColumn(name = "user_role_id")
+    private UserRole userRole;
+
+    @OneToMany(mappedBy = "flight")
+    private List<Ticket> ticketList;
 }

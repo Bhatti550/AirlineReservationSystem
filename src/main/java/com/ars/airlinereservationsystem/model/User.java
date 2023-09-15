@@ -1,4 +1,4 @@
-package com.ars.airlinereservationsystem.entity;
+package com.ars.airlinereservationsystem.model;
 
 import jakarta.persistence.*;
 import lombok.Data;

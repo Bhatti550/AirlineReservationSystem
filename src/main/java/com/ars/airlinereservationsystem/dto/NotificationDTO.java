@@ -1,8 +1,8 @@
 package com.ars.airlinereservationsystem.dto;
 
-import com.ars.airlinereservationsystem.entity.CancelFlight;
-import com.ars.airlinereservationsystem.entity.Ticket;
-import com.ars.airlinereservationsystem.entity.UserRole;
+import com.ars.airlinereservationsystem.model.CancelFlight;
+import com.ars.airlinereservationsystem.model.Ticket;
+import com.ars.airlinereservationsystem.model.UserRole;
 import lombok.Data;
 
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package com.ars.airlinereservationsystem.entity;
+package com.ars.airlinereservationsystem.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -19,11 +19,20 @@ public class UserRole {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-    @OneToMany(mappedBy = "user_role")
-    private List<Flight> flightList;
-    @OneToMany(mappedBy = "user_role")
-    private List<Ticket> ticketList;
+
     @OneToMany(mappedBy = "userRole")
-    private List<Payment> payment;
+    private List<Flight> flightList;
+
+    @OneToMany(mappedBy = "userRole")
+    private List<Ticket> ticketList;
+
+    @OneToMany(mappedBy = "userRole")
+    private List<Airline> airlineList;
+
+    @OneToMany(mappedBy = "userRole")
+    private List<CancelFlight> cancelFlightList;
+
+    @OneToMany(mappedBy = "userRole")
+    private List<UserNotification> userNotificationList;
 
 }

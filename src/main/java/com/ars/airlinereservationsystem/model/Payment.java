@@ -1,4 +1,4 @@
-package com.ars.airlinereservationsystem.entity;
+package com.ars.airlinereservationsystem.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "airline")
+@Table(name = "payment")
 @Data
 public class Payment {
     @Id
@@ -23,7 +23,7 @@ public class Payment {
     @OneToOne
     @JoinColumn(name = "ticket_id")
     private Ticket ticket;
-    @ManyToOne
-    @JoinColumn(name = "user_role_id")
-    private UserRole userRole;
+    @OneToOne(mappedBy = "payment")
+    private Notification notification;
+
 }

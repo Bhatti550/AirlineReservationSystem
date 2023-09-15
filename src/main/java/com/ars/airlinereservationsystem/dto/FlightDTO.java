@@ -1,7 +1,7 @@
 package com.ars.airlinereservationsystem.dto;
 
-import com.ars.airlinereservationsystem.entity.Airline;
-import com.ars.airlinereservationsystem.entity.FlightClass;
+import com.ars.airlinereservationsystem.model.Airline;
+import com.ars.airlinereservationsystem.model.util.FlightClass;
 import lombok.Data;
 
 import java.time.LocalDateTime;

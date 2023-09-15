@@ -1,4 +1,4 @@
-package com.ars.airlinereservationsystem.entity;
+package com.ars.airlinereservationsystem.model.util;
 
 public enum FlightClass {
     BUSINESS("Business Class"),

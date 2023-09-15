@@ -1,4 +1,4 @@
-package com.ars.airlinereservationsystem.entity;
+package com.ars.airlinereservationsystem.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -20,4 +20,7 @@ public class Airline {
     private Long contactNumber;
     @OneToMany(mappedBy = "airline")
     private List<Flight> flightList;
+    @ManyToOne
+    @JoinColumn(name = "user_role_id")
+    private UserRole userRole;
 }

@@ -1,6 +1,6 @@
 package com.ars.airlinereservationsystem.repository;
 
-import com.ars.airlinereservationsystem.entity.Airline;
+import com.ars.airlinereservationsystem.model.Airline;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

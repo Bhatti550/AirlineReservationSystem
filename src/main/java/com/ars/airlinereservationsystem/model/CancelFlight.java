@@ -1,4 +1,4 @@
-package com.ars.airlinereservationsystem.entity;
+package com.ars.airlinereservationsystem.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -22,6 +22,10 @@ public class CancelFlight {
     @OneToOne
     @JoinColumn(name = "flight_id")
     private Flight flight;
-    @OneToMany(mappedBy = "cancelflight", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "cancel_flight")
     private List<Notification> notificationList;
+    @ManyToOne
+    @JoinColumn(name = "user_role_id")
+    private UserRole userRole;
 }

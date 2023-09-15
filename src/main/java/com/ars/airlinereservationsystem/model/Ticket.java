@@ -1,4 +1,4 @@
-package com.ars.airlinereservationsystem.entity;
+package com.ars.airlinereservationsystem.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -18,6 +18,12 @@ public class Ticket {
     private Integer numberOfPassenger;
     @Column(name = "total_fare")
     private Float totalFare;
-    @OneToMany(mappedBy = "ticket")
-    private List<Notification> notificationList;
+    @ManyToOne
+    @JoinColumn(name = "user_role_id")
+    private UserRole userRole;
+    @ManyToOne
+    @JoinColumn(name = "flight_id")
+    private Flight flight;
+    @OneToOne(mappedBy = "ticket")
+    private Payment payment;
 }

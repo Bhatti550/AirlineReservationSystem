@@ -1,4 +1,4 @@
-package com.ars.airlinereservationsystem.entity;
+package com.ars.airlinereservationsystem.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -16,5 +16,5 @@ public class Role {
     @Column(name = "role",nullable = false,unique = true)
     private String roleName;
     @OneToMany(mappedBy = "role")
-    private List<Role> roleList;
+    private List<UserRole> roleList;
 }
