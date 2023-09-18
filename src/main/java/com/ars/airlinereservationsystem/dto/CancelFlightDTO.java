@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 @Data
 public class CancelFlightDTO {
-    private UUID id;
+    private Long id;
     private String cancellationReason;
     private LocalDateTime date;
     private Flight flight;

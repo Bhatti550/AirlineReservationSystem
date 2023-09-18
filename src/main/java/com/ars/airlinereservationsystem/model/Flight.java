@@ -6,16 +6,15 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "fight")
 @Data
 public class Flight {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private UUID id;
+    private Long id;
     @Column(name = "departure_location")
     private String departureLocation;
     @Column(name = "destination_location")
@@ -35,18 +34,11 @@ public class Flight {
     @Enumerated(EnumType.STRING)
     @Column(name = "flight_class")
     private FlightClass flightClass;
-
     @ManyToOne
     @JoinColumn(name = "airline_id")
     private Airline airline;
-
     @OneToOne(mappedBy = "flight")
     private CancelFlight cancelFlight;
-
-    @ManyToOne
-    @JoinColumn(name = "user_role_id")
-    private UserRole userRole;
-
     @OneToMany(mappedBy = "flight")
-    private List<Ticket> ticketList;
+    private List<BookTicket> bookTickets;
 }

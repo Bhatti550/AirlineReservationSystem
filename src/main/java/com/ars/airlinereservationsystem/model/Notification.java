@@ -6,16 +6,15 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "notification")
 @Data
 public class Notification {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private UUID id;
+    private Long id;
     @Column(name = "message")
     private String message;
     @Column(name = "date_time")
@@ -29,6 +28,7 @@ public class Notification {
     @ManyToOne
     @JoinColumn(name = "cancel_flight_id")
     private CancelFlight cancel_flight;
-    @OneToMany(mappedBy = "notification")
-    private List<UserNotification> userNotificationList;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private  User user;
 }

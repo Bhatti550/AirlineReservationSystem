@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Data
 public class FlightDTO {
-    private UUID id;
+    private Long id;
     private String departureLocation;
     private String destinationLocation;
     private LocalDateTime departureTime;

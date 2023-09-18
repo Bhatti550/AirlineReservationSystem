@@ -6,7 +6,7 @@ import org.w3c.dom.stylesheets.LinkStyle;
 import java.util.List;
 
 public interface UserServiceI {
-     List<UserDTO> createUser(UserDTO userDTO);
+     UserDTO createUser(UserDTO userDTO);
      List<UserDTO> getUser(String email);
      UserDTO deleteUser( String email);
      UserDTO updateUser(UserDTO userDTO);

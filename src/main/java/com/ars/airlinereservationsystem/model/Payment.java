@@ -4,16 +4,15 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "payment")
 @Data
 public class Payment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private UUID id;
+    private Long id;
     @Column(name = "amount")
     private float amount;
     @Column(name = "date_time")
@@ -22,8 +21,11 @@ public class Payment {
     private boolean paymentStatus;
     @OneToOne
     @JoinColumn(name = "ticket_id")
-    private Ticket ticket;
+    private BookTicket bookTicket;
     @OneToOne(mappedBy = "payment")
     private Notification notification;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

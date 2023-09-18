@@ -4,7 +4,6 @@ import com.ars.airlinereservationsystem.model.CancelFlight;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
 @Repository
-public interface CancelFlightRepository extends JpaRepository<CancelFlight, UUID> {
+public interface CancelFlightRepository extends JpaRepository<CancelFlight, Long> {
 }

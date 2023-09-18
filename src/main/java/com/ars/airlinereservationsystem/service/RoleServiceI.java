@@ -1,12 +1,13 @@
 package com.ars.airlinereservationsystem.service;
 
 import com.ars.airlinereservationsystem.dto.RoleDTO;
-import org.springframework.http.ResponseEntity;
+import com.ars.airlinereservationsystem.model.Role;
 
 import java.util.List;
 
 public interface RoleServiceI {
-    RoleDTO deleteRole(String roleName);
+    void deleteRole(String roleName);
     List<RoleDTO> getAllRole();
-    ResponseEntity<List<RoleDTO>> addRole(RoleDTO roleDTO);
+   RoleDTO addRole(RoleDTO roleDTO);
+   RoleDTO updateRole(RoleDTO roleDTO);
 }

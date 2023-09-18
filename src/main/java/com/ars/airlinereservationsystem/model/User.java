@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
-import java.util.UUID;
 
 
 @Entity
@@ -12,9 +11,9 @@ import java.util.UUID;
 @Data
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private UUID id;
+    private Long id;
     @Column(name = "name",nullable = false)
     private String name;
     @Column(name ="password", nullable = false)
@@ -25,4 +24,11 @@ public class User {
     private Long number;
     @OneToMany(mappedBy = "user")
     private List<UserRole> userRoleList;
+    @OneToMany(mappedBy = "user")
+    private List<Airline> airlineList;
+    @OneToMany(mappedBy = "user")
+    private List<BookTicket> bookTicketList;
+    @OneToMany(mappedBy = "user")
+    private List<Notification> notificationList;
+
 }
