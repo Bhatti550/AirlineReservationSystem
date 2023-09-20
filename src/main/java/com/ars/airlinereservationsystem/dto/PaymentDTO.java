@@ -1,8 +1,7 @@
 package com.ars.airlinereservationsystem.dto;
 
 
-import com.ars.airlinereservationsystem.model.BookTicket;
-import com.ars.airlinereservationsystem.model.UserRole;
+import com.ars.airlinereservationsystem.model.Booking;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -14,6 +13,5 @@ public class PaymentDTO {
     private float amount;
     private LocalDateTime date;
     private boolean paymentStatus;
-    private BookTicket bookTicket;
-    private UserRole userRole;
+    private Booking bookTicket;
 }

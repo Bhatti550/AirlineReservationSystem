@@ -6,21 +6,17 @@ import lombok.Data;
 import java.util.List;
 
 @Entity
-@Table(name = "airline")
+@Table(name = "airline_company")
 @Data
-public class Airline {
+public class AirlineCompany {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "name",nullable = false,unique = true)
     private String name;
-    @Column(name = "number", length = 12,nullable = false,unique = true)
-    private Long contactNumber;
-    @OneToMany(mappedBy = "airline")
-    private List<Flight> flightList;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
+    @OneToMany(mappedBy = "airlineCompany")
+    private List<AirPlane> airPlaneList;
+    @OneToMany(mappedBy = "airlineCompany")
+    private List<Route> routeList;
 }

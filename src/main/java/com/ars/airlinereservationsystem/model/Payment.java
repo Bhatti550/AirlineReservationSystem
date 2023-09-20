@@ -19,13 +19,8 @@ public class Payment {
     private LocalDateTime date;
     @Column(name = "payment_status")
     private boolean paymentStatus;
-    @OneToOne
-    @JoinColumn(name = "ticket_id")
-    private BookTicket bookTicket;
-    @OneToOne(mappedBy = "payment")
-    private Notification notification;
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "booking_id")
+    private Booking booking;
 
 }

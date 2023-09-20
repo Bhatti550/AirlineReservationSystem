@@ -3,17 +3,17 @@ package com.ars.airlinereservationsystem.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity
-@Table(name = "user_role")
 @Data
-public class UserRole {
+@Entity
+@Table(name = "flight_booking")
+public class FlightBooking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private  User user;
+    @JoinColumn(name = "booking_id")
+    private Booking booking;
     @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @JoinColumn(name = "flight_id")
+    private Flight flight;
 }
