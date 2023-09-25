@@ -15,6 +15,12 @@ public class AirlineCompany {
     private Long id;
     @Column(name = "name",nullable = false,unique = true)
     private String name;
+    @Column(name = "email", unique = true)
+    private String email;
+    @Column(name = "contact_number", unique = true, length = 13)
+    private Long number;
+    @Column(name = "location")
+    private String location;
     @OneToMany(mappedBy = "airlineCompany")
     private List<AirPlane> airPlaneList;
     @OneToMany(mappedBy = "airlineCompany")

@@ -1,4 +1,4 @@
-package com.ars.airlinereservationsystem.service.implementation;
+package com.ars.airlinereservationsystem.service;
 import com.ars.airlinereservationsystem.dto.FlightDTO;
 import com.ars.airlinereservationsystem.repository.BookingRepository;
 import com.ars.airlinereservationsystem.repository.FlightBookingRepository;
