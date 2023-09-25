@@ -10,7 +10,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,12 +40,33 @@ public class AdminServiceImpl implements UserServiceI {
 
     @Override
     public UserDTO deleteUser(String email, String password) {
-        return null;
+        User user = userRepository.findUserByEmailAndPassword(email, password);
+        if (user != null) {
+            userRepository.delete(user);
+            return  modelMapper.map(user, UserDTO.class);
+        } else {
+            throw  new CustomServiceException(404,"User Not Found");
+        }
     }
 
     @Override
-    public UserDTO updateUser(UserDTO userDTO, String email) {
-        return null;
+    public UserDTO updateUser(UserDTO userDTO) {
+        User user=userRepository.findUserByEmail(userDTO.getEmail());
+        if(user!=null){
+            user.setId(user.getId());
+            user.setEmail(userDTO.getEmail());
+            user.setPassword(userDTO.getPassword());
+            user.setName(userDTO.getName());
+            user.setAddress(userDTO.getAddress());
+            user.setGender(userDTO.getGender());
+            user.setNumber(userDTO.getNumber());
+            user.setRole(user.getRole());
+            userRepository.save(user);
+            return this.modelMapper.map(user,UserDTO.class);
+        }
+        else {
+            throw new CustomServiceException(404,"User Data Not found");
+        }
     }
 
     @Override
@@ -55,11 +75,22 @@ public class AdminServiceImpl implements UserServiceI {
                 .stream()
                 .filter(user -> user.getRole() == Role.ADMIN)
                 .toList();
-        List<UserDTO> adminUserDTOList=new ArrayList<>();
+        List<UserDTO> adminUserDTOList;
         adminUserDTOList= adminUsers.stream()
                 .map(user -> modelMapper.map(user, UserDTO.class))
                 .collect(Collectors.toList());
         return adminUserDTOList;
 
+    }
+
+    @Override
+    public UserDTO getUser(String email) {
+        User user=userRepository.findUserByEmail(email);
+        if (user!=null){
+            return this.modelMapper.map(user, UserDTO.class);
+        }
+        else {
+            throw new CustomServiceException(404,"User Not Found");
+        }
     }
 }

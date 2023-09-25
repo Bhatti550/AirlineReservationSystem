@@ -1,6 +1,6 @@
 package com.ars.airlinereservationsystem.exception;
 
-import lombok.Data;
+
 import lombok.Getter;
 
 

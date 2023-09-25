@@ -29,7 +29,7 @@ public class User {
     private Gender gender;
     @Enumerated(EnumType.STRING)
     @Column(name = "Role")
-    private Role role;
+    private Role role=Role.PASSENGER; // Set Default Value for Role.
     @Column(name = "address", length = 200)
     private String address;
     @OneToMany(mappedBy = "user")

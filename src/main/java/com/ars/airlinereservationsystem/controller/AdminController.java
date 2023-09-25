@@ -27,4 +27,19 @@ public class AdminController {
         List<UserDTO> userDTOList=adminService.getAllUsers();
         return new ResponseEntity<UserDTO>((UserDTO) userDTOList,HttpStatus.FOUND);
     }
+    @DeleteMapping("/delete-user")
+    public ResponseEntity<UserDTO> deleteUser(@RequestParam String email, @RequestParam String password){
+        UserDTO userDTO=adminService.deleteUser(email,password);
+        return new ResponseEntity<UserDTO>(userDTO,HttpStatus.ACCEPTED);
+    }
+    @PutMapping("/update-user")
+    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO){
+        UserDTO userDTO1=adminService.updateUser(userDTO);
+        return new ResponseEntity<UserDTO>(userDTO1,HttpStatus.ACCEPTED);
+    }
+    @GetMapping("/get-user")
+    public ResponseEntity<UserDTO> getUser(@RequestParam String email){
+        UserDTO userDTO=adminService.getUser(email);
+        return new ResponseEntity<UserDTO>(userDTO,HttpStatus.FOUND);
+    }
 }

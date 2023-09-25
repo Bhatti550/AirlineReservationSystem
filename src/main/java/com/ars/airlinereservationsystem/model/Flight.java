@@ -1,11 +1,9 @@
 package com.ars.airlinereservationsystem.model;
 
 import com.ars.airlinereservationsystem.model.util.FlightStatus;
-import com.ars.airlinereservationsystem.model.util.TravelClass;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
