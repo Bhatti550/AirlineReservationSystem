@@ -11,5 +11,4 @@ public class SeatDTO {
     private double price;
     private AirPlane airPlane;
     private boolean availableStatus;
-
 }

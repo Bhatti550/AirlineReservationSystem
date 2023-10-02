@@ -17,7 +17,7 @@ public class AirlineCompanyController {
     AirlineCompanyController(AirlineCompanyService airlineCompanyService){
         this.airlineCompanyService=airlineCompanyService;
     }
-    @PostMapping("/add")
+    @PostMapping("/admin/add")
     private ResponseEntity<AirlineCompanyDTO> addAirlineCompany(@RequestBody AirlineCompanyDTO airlineCompanyDTO){
         AirlineCompanyDTO airlineCompanyDTO1=airlineCompanyService.addAirlineCompany(airlineCompanyDTO);
         return new ResponseEntity<AirlineCompanyDTO>(airlineCompanyDTO1, HttpStatus.CREATED);
@@ -27,12 +27,12 @@ public class AirlineCompanyController {
         AirlineCompanyDTO airlineCompanyDTO=airlineCompanyService.getAirlineCompany(name);
         return new ResponseEntity<AirlineCompanyDTO>(airlineCompanyDTO,HttpStatus.FOUND);
     }
-    @DeleteMapping("/delete")
+    @DeleteMapping("/admin/delete")
     public ResponseEntity<AirlineCompanyDTO> deleteAirlineCompany(@RequestParam String name){
         AirlineCompanyDTO airlineCompanyDTO=airlineCompanyService.deleteAirlineCompany(name);
         return new ResponseEntity<AirlineCompanyDTO>(airlineCompanyDTO,HttpStatus.OK);
     }
-    @PutMapping("/update")
+    @PutMapping("/admin/update")
     public AirlineCompanyDTO updateAirlineCompany(@RequestBody AirlineCompanyDTO airlineCompanyDTO){
         AirlineCompanyDTO airlineCompanyDTO1=airlineCompanyService.updateAirlineCompany(airlineCompanyDTO);
         return new ResponseEntity<AirlineCompanyDTO>(airlineCompanyDTO1,HttpStatus.ACCEPTED).getBody();

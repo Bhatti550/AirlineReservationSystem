@@ -74,4 +74,16 @@ public class AirplaneService {
             return airPlaneDTOList;
         }
     }
+    public List<AirPlaneDTO> getAirPlaneByAirlineCompany(Long airlineCompanyId) {
+
+        List<AirPlane> airPlaneList = airPlaneRepository.findAirPlaneByAirlineCompanyId(airlineCompanyId);
+        if (airPlaneList.isEmpty()) {
+            throw new CustomServiceException(404, "Records not Found");
+        } else {
+            List<AirPlaneDTO> airPlaneDTOList = airPlaneList.stream()
+                    .map(airPlane -> modelMapper.map(airPlaneList, AirPlaneDTO.class))
+                    .toList();
+            return airPlaneDTOList;
+        }
+    }
 }

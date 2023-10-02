@@ -17,11 +17,13 @@ public class Flight {
     @Enumerated(EnumType.STRING)
     @Column(name = "flight_status")
     private FlightStatus flightStatus;
+    @Column(name = "code")
+    private String flightCode;
     @OneToMany(mappedBy = "flight")
     private List<Schedule> scheduleList;
     @ManyToOne
     @JoinColumn(name = "route_id")
     private Route route;
     @OneToMany(mappedBy ="flight")
-    private List<FlightBooking> flightBookingList;
+    private List<Booking> bookingList;
 }

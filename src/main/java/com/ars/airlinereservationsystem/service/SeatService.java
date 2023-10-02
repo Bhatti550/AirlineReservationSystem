@@ -3,6 +3,7 @@ package com.ars.airlinereservationsystem.service;
 import com.ars.airlinereservationsystem.dto.SeatDTO;
 import com.ars.airlinereservationsystem.exception.CustomServiceException;
 import com.ars.airlinereservationsystem.model.Seat;
+import com.ars.airlinereservationsystem.model.util.TravelClass;
 import com.ars.airlinereservationsystem.repository.SeatRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,50 @@ public class SeatService {
         }else
         {
             throw new CustomServiceException(404,"Record not found");
+        }
+    }
+    public SeatDTO getSeat(int seatNo){
+        Seat seat=seatRepository.findBySeatNo(seatNo);
+        if (seat!=null){
+            SeatDTO seatDTO=this.modelMapper.map(seat, SeatDTO.class);
+            return seatDTO;
+        }else {
+            throw new CustomServiceException(404,"Records not Found");
+        }
+    }
+    public List<SeatDTO> getSeatByPrice(double startPrice, double endPrice ){
+        List<Seat> seatList=seatRepository.findByPriceStartsWithAndPriceEndingWith(startPrice,endPrice);
+        if(seatList.isEmpty()){
+            throw new CustomServiceException(404,"Data not Found");
+        }else {
+            List<SeatDTO> seatDTOList = seatList.stream()
+                    .map(seat -> modelMapper.map(seatList, SeatDTO.class))
+                    .toList();
+            return seatDTOList;
+        }
+    }
+    public List<SeatDTO> getSeatByStatus(boolean availableStatus){
+        List<Seat> seatList=seatRepository.findByAvailableStatus(availableStatus);
+        if(seatList.isEmpty()){
+            throw new CustomServiceException(404,"Data not Found");
+        }else {
+
+            List<SeatDTO> seatDTOList = seatList.stream()
+                    .map(seat -> modelMapper.map(seatList, SeatDTO.class))
+                    .toList();
+            return seatDTOList;
+        }
+    }
+    public List<SeatDTO> getSeatByTravelClass(TravelClass travelClass) {
+        List<Seat> seatList = seatRepository.findByTravelClass(travelClass);
+        if (seatList.isEmpty()) {
+            throw new CustomServiceException(404, "Data not Found");
+        } else {
+
+            List<SeatDTO> seatDTOList = seatList.stream()
+                    .map(seat -> modelMapper.map(seatList, SeatDTO.class))
+                    .toList();
+            return seatDTOList;
         }
     }
 }

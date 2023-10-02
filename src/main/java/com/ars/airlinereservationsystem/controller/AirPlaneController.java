@@ -17,12 +17,12 @@ public class AirPlaneController {
     AirPlaneController(AirplaneService airplaneService){
         this.airplaneService=airplaneService;
     }
-    @PostMapping("/add")
+    @PostMapping("/admin/add")
     public ResponseEntity<AirPlaneDTO> adAirPlane(@RequestBody AirPlaneDTO airPlaneDTO){
         AirPlaneDTO airPlaneDTO1=airplaneService.addAirplane(airPlaneDTO);
         return new ResponseEntity<AirPlaneDTO>(airPlaneDTO1, HttpStatus.CREATED);
     }
-    @PutMapping("/update")
+    @PutMapping("/admin/update")
     public ResponseEntity<AirPlaneDTO> updateAirPlane(@RequestBody AirPlaneDTO airPlaneDTO){
         AirPlaneDTO airPlaneDTO1=airplaneService.updateAirplane(airPlaneDTO);
         return new ResponseEntity<AirPlaneDTO>(airPlaneDTO1, HttpStatus.ACCEPTED);
@@ -37,7 +37,7 @@ public class AirPlaneController {
         List<AirPlaneDTO> airPlaneDTOList=airplaneService.getAllAirPlanes();
         return new ResponseEntity<List<AirPlaneDTO>>(airPlaneDTOList, HttpStatus.FOUND);
     }
-    @PutMapping("/delete")
+    @PutMapping("/admin/delete")
     public ResponseEntity<AirPlaneDTO> deleteAirPlane(@RequestParam String airPlaneNo){
         AirPlaneDTO airPlaneDTO=airplaneService.deleteAirplane(airPlaneNo);
         return new ResponseEntity<AirPlaneDTO>(airPlaneDTO,HttpStatus.OK);

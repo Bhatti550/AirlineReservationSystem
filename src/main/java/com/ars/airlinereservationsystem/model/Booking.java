@@ -27,6 +27,7 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "seat_id")
     private  Seat seat;
-    @OneToMany(mappedBy = "booking")
-    private List<FlightBooking> flightBookingList;
+    @ManyToOne
+    @JoinColumn(name = "flight_id")
+    private Flight flight;
 }

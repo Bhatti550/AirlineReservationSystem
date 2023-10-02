@@ -4,7 +4,6 @@ import com.ars.airlinereservationsystem.model.util.Gender;
 import com.ars.airlinereservationsystem.model.util.Role;
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.util.List;
 
 
@@ -29,9 +28,11 @@ public class User {
     private Gender gender;
     @Enumerated(EnumType.STRING)
     @Column(name = "Role")
-    private Role role=Role.PASSENGER; // Set Default Value for Role.
+    private Role role;
     @Column(name = "address", length = 200)
     private String address;
     @OneToMany(mappedBy = "user")
     private List<Booking> bookingList;
+
+
 }

@@ -1,7 +1,7 @@
 package com.ars.airlinereservationsystem.controller;
 
 import com.ars.airlinereservationsystem.dto.UserDTO;
-import com.ars.airlinereservationsystem.service.implementation.PassengerServiceImpl;
+import com.ars.airlinereservationsystem.service.implementation.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +11,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/passenger")
 public class PassengerController {
-    private final PassengerServiceImpl passengerService;
-    PassengerController(PassengerServiceImpl passengerService){
+    private final UserServiceImpl passengerService;
+    PassengerController(UserServiceImpl passengerService){
         this.passengerService=passengerService;
     }
     @PostMapping("/sign-up")
@@ -21,9 +21,9 @@ public class PassengerController {
         return new ResponseEntity<UserDTO>(userDTO1, HttpStatus.CREATED);
     }
     @GetMapping("/get-all-users")
-    public ResponseEntity<UserDTO> getAllUsers(){
-        List<UserDTO> userDTOList=passengerService.getAllUsers();
-        return new ResponseEntity<UserDTO>((UserDTO) userDTOList,HttpStatus.FOUND);
+    public ResponseEntity<List<UserDTO>> getAllUsers(){
+        List<UserDTO> userDTOList=passengerService.getAllPassengerUsers();
+        return new ResponseEntity<List<UserDTO>>(userDTOList,HttpStatus.FOUND);
     }
     @DeleteMapping("/delete-user")
     public ResponseEntity<UserDTO> deleteUser(@RequestParam String email, @RequestParam String password){

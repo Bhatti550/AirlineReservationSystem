@@ -3,6 +3,7 @@ package com.ars.airlinereservationsystem;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 public class AirlineReservationSystemApplication implements CommandLineRunner {
@@ -13,6 +14,5 @@ public class AirlineReservationSystemApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
     }
 }

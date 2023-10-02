@@ -1,7 +1,7 @@
 package com.ars.airlinereservationsystem.controller;
 
 import com.ars.airlinereservationsystem.dto.UserDTO;
-import com.ars.airlinereservationsystem.service.implementation.AdminServiceImpl;
+import com.ars.airlinereservationsystem.service.implementation.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
-    private final AdminServiceImpl adminService;
+    private final UserServiceImpl adminService;
     @Autowired
-    AdminController(AdminServiceImpl adminService){
+    AdminController(UserServiceImpl adminService){
         this.adminService=adminService;
     }
     @PostMapping("/sign-up")
@@ -23,9 +23,9 @@ public class AdminController {
         return new ResponseEntity<UserDTO>(userDTO1, HttpStatus.CREATED);
     }
     @GetMapping("/get-users")
-    public ResponseEntity<UserDTO> getAllUsers(){
-        List<UserDTO> userDTOList=adminService.getAllUsers();
-        return new ResponseEntity<UserDTO>((UserDTO) userDTOList,HttpStatus.FOUND);
+    public ResponseEntity<List<UserDTO>> getAllUsers(){
+        List<UserDTO> userDTOList=adminService.getAllAdminUsers();
+        return new ResponseEntity<List<UserDTO>>(userDTOList,HttpStatus.FOUND);
     }
     @DeleteMapping("/delete-user")
     public ResponseEntity<UserDTO> deleteUser(@RequestParam String email, @RequestParam String password){

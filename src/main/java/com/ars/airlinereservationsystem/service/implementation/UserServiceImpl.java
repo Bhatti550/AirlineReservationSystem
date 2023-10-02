@@ -8,18 +8,21 @@ import com.ars.airlinereservationsystem.repository.UserRepository;
 import com.ars.airlinereservationsystem.service.UserServiceI;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AdminServiceImpl implements UserServiceI {
+public class UserServiceImpl implements UserServiceI {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     @Autowired
-    AdminServiceImpl(UserRepository userRepository,ModelMapper modelMapper){
+    UserServiceImpl(UserRepository userRepository,ModelMapper modelMapper){
         this.userRepository=userRepository;
         this.modelMapper=modelMapper;
     }
@@ -70,7 +73,20 @@ public class AdminServiceImpl implements UserServiceI {
     }
 
     @Override
-    public List<UserDTO> getAllUsers() {
+    public List<UserDTO> getAllPassengerUsers() {
+        List<User> passengerUsers = userRepository.findAll()
+                .stream()
+                .filter(user -> user.getRole() == Role.PASSENGER)
+                .toList();
+        List<UserDTO> passengerUserDTOList;
+        passengerUserDTOList= passengerUsers.stream()
+                .map(user -> modelMapper.map(user, UserDTO.class))
+                .collect(Collectors.toList());
+        return passengerUserDTOList;
+    }
+
+    @Override
+    public List<UserDTO> getAllAdminUsers() {
         List<User> adminUsers = userRepository.findAll()
                 .stream()
                 .filter(user -> user.getRole() == Role.ADMIN)
@@ -92,5 +108,14 @@ public class AdminServiceImpl implements UserServiceI {
         else {
             throw new CustomServiceException(404,"User Not Found");
         }
+    }
+    @Override
+    public UserDetailsService userDetailsService(){
+        return new UserDetailsService() {
+            @Override
+            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+                return userRepository.findByEmail(username);
+            }
+        };
     }
 }
