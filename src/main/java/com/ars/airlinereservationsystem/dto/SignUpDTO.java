@@ -6,20 +6,15 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.List;
 
 @Data
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
-public class UserDTO{
-    private Long id;
+@AllArgsConstructor
+public class SignUpDTO {
     @NotNull
     private String name;
     @Size(min = 6,message = "Password must be at least 6 characters long")

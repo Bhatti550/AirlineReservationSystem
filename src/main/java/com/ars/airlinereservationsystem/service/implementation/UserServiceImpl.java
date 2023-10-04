@@ -8,9 +8,6 @@ import com.ars.airlinereservationsystem.repository.UserRepository;
 import com.ars.airlinereservationsystem.service.UserServiceI;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,21 +23,6 @@ public class UserServiceImpl implements UserServiceI {
         this.userRepository=userRepository;
         this.modelMapper=modelMapper;
     }
-
-    @Override
-    public UserDTO signup(UserDTO userDTO) {
-
-        if(userDTO.getRole()==null||userDTO.getName().isEmpty()||userDTO.getEmail().isEmpty()
-        ||userDTO.getPassword().isEmpty()) {
-            throw new CustomServiceException(400,"Some Data is Missing");
-        } else if (userDTO.getGender()==null) {
-            throw new CustomServiceException(400,"Some Data is Missing");
-        }
-        User user = this.modelMapper.map(userDTO, User.class);
-        User user1 = userRepository.save(user);
-        return this.modelMapper.map(user1, UserDTO.class);
-    }
-
     @Override
     public UserDTO deleteUser(String email, String password) {
         User user = userRepository.findUserByEmailAndPassword(email, password);
@@ -108,14 +90,5 @@ public class UserServiceImpl implements UserServiceI {
         else {
             throw new CustomServiceException(404,"User Not Found");
         }
-    }
-    @Override
-    public UserDetailsService userDetailsService(){
-        return new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return userRepository.findByEmail(username);
-            }
-        };
     }
 }
