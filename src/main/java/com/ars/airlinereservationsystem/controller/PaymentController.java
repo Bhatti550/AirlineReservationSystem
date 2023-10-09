@@ -22,12 +22,12 @@ public class PaymentController {
         PaymentDTO paymentDTO1=paymentService.addPayment(paymentDTO);
         return new ResponseEntity<PaymentDTO>(paymentDTO1, HttpStatus.CREATED);
     }
-    @PutMapping("/update")
+    @PutMapping("admin/update")
     public ResponseEntity<PaymentDTO> updatePayment(@RequestBody PaymentDTO paymentDTO){
         PaymentDTO paymentDTO1=paymentService.updatePayment(paymentDTO);
         return new ResponseEntity<PaymentDTO>(paymentDTO1, HttpStatus.ACCEPTED);
     }
-    @DeleteMapping("/delete")
+    @DeleteMapping("admin/delete")
     public ResponseEntity<PaymentDTO> deletePayment(@RequestParam Long paymentId){
         PaymentDTO paymentDTO=paymentService.deletePayment(paymentId);
         return new ResponseEntity<PaymentDTO>(paymentDTO, HttpStatus.OK);

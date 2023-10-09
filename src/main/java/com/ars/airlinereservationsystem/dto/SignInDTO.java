@@ -12,8 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SignInDTO {
-    @Size(min = 6,message = "Password must be at least 6 characters long")
-    private String password;
     @Email(message = "Please Provide Valid Email Address")
     private String email;
+    @Size(min = 6,message = "Password must be at least 6 characters long")
+    private String password;
+
 }

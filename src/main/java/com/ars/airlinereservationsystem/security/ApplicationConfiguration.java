@@ -33,7 +33,6 @@ public class ApplicationConfiguration {
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
-        // responsible for fetch user details and encrypting password
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(userDetailsService());
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());

@@ -1,7 +1,6 @@
 package com.ars.airlinereservationsystem.service;
 
 import com.ars.airlinereservationsystem.dto.AirlineCompanyDTO;
-import com.ars.airlinereservationsystem.dto.UserDTO;
 import com.ars.airlinereservationsystem.exception.CustomServiceException;
 import com.ars.airlinereservationsystem.model.AirlineCompany;
 import com.ars.airlinereservationsystem.repository.AirlineCompanyRepository;

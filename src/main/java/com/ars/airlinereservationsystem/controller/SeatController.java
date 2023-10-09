@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/seat")
 public class SeatController {
 
-    private SeatService seatService;
+    private final SeatService seatService;
     @Autowired
     public SeatController(SeatService seatService) {
         this.seatService = seatService;
