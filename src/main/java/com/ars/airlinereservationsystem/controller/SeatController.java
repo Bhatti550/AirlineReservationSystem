@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/seat")
+@RequestMapping("api/v1/seats")
 public class SeatController {
 
     private final SeatService seatService;
@@ -19,22 +19,22 @@ public class SeatController {
     public SeatController(SeatService seatService) {
         this.seatService = seatService;
     }
-    @PostMapping("/admin/add")
+    @PostMapping
     public ResponseEntity<SeatDTO> addSeat(@RequestBody SeatDTO seatDTO){
         SeatDTO seatDTO1=seatService.addSeat(seatDTO);
         return new ResponseEntity<SeatDTO>(seatDTO1, HttpStatus.CREATED);
     }
-    @PutMapping("/admin/update")
+    @PutMapping
     public ResponseEntity<SeatDTO> updateSeat(@RequestBody SeatDTO seatDTO){
         SeatDTO seatDTO1=seatService.updateSeat(seatDTO);
         return new ResponseEntity<SeatDTO>(seatDTO1, HttpStatus.ACCEPTED);
     }
-    @GetMapping("/get")
+    @GetMapping("/{seatNo}")
     public ResponseEntity<SeatDTO> getSeat(@RequestParam int seatNo){
         SeatDTO seatDTO=seatService.getSeat(seatNo);
         return new ResponseEntity<SeatDTO>(seatDTO,HttpStatus.FOUND);
     }
-    @GetMapping("/get-by-price")
+    @GetMapping("/{startPrice}{endPrice}")
     public ResponseEntity<List<SeatDTO>> getSeatByPrice(@RequestParam double startPrice, @RequestParam  double endPrice ){
         List<SeatDTO> seatDTOList=seatService.getSeatByPrice(startPrice,endPrice);
         return new ResponseEntity<List<SeatDTO>>(seatDTOList,HttpStatus.FOUND);

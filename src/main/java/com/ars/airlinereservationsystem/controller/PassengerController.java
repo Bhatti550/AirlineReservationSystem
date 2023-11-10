@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/passenger")
+@RequestMapping("api/v1/passengers")
 public class PassengerController {
     private final UserServiceImpl passengerService;
     private final AuthenticationService authenticationService;
@@ -24,7 +24,7 @@ public class PassengerController {
         this.passengerService=adminService;
         this.authenticationService=authenticationService;
     }
-    @PostMapping("/register")
+    @PostMapping
     public ResponseEntity<AuthenticationResponse> register(@RequestBody SignUpDTO request){
         return ResponseEntity.ok(authenticationService.register(request));
 
@@ -34,22 +34,22 @@ public class PassengerController {
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
-    @GetMapping("/get-all-users")
+    @GetMapping
     public ResponseEntity<List<UserDTO>> getAllUsers(){
         List<UserDTO> userDTOList=passengerService.getAllPassengerUsers();
         return new ResponseEntity<List<UserDTO>>(userDTOList,HttpStatus.FOUND);
     }
-    @DeleteMapping("/delete-user")
-    public ResponseEntity<UserDTO> deleteUser(@RequestParam String email, @RequestParam String password){
+    @DeleteMapping("/{email}{password}")
+    public ResponseEntity<UserDTO> deleteUser(@PathVariable String email, @PathVariable String password){
         UserDTO userDTO=passengerService.deleteUser(email,password);
         return new ResponseEntity<UserDTO>(userDTO,HttpStatus.ACCEPTED);
     }
-    @PutMapping("/update-user")
+    @PutMapping
     public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO){
         UserDTO userDTO1=passengerService.updateUser(userDTO);
         return new ResponseEntity<UserDTO>(userDTO1,HttpStatus.ACCEPTED);
     }
-    @GetMapping("/get-user")
+    @GetMapping("/{email}")
     public ResponseEntity<UserDTO> getUser(@RequestParam String email){
         UserDTO userDTO=passengerService.getUser(email);
         return new ResponseEntity<UserDTO>(userDTO,HttpStatus.FOUND);

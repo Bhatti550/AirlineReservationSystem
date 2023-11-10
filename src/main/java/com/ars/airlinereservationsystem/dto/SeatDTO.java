@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class SeatDTO {
+    private Long id;
     private int seatNo;
     private TravelClass travelClass;
     private double price;

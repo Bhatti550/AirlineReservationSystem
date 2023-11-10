@@ -2,6 +2,7 @@ package com.ars.airlinereservationsystem.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,6 +15,7 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+    @CreationTimestamp
     @Column(name = "date")
     private LocalDateTime localDateTime;
     @ManyToOne

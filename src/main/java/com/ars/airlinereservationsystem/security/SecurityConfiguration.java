@@ -27,8 +27,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorize->authorize
                         .requestMatchers("/swagger-ui.html","/**")
                         .permitAll()
-                        .requestMatchers("/admin/**").hasAuthority(Role.ADMIN.name()).
-                        requestMatchers("/passenger/**").hasAuthority(Role.PASSENGER.name())
+                        .requestMatchers("/admins/**").hasAuthority(Role.ADMIN.name()).
+                        requestMatchers("/passengers/**").hasAuthority(Role.PASSENGER.name())
                         .anyRequest()
                         .authenticated())
                 .sessionManagement(session -> session

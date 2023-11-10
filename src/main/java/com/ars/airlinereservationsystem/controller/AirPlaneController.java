@@ -10,34 +10,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/airplane")
+@RequestMapping("api/v1/airplane")
 public class AirPlaneController {
     private final AirplaneService airplaneService;
     @Autowired
     AirPlaneController(AirplaneService airplaneService){
         this.airplaneService=airplaneService;
     }
-    @PostMapping("/admin/add")
+    @PostMapping
     public ResponseEntity<AirPlaneDTO> adAirPlane(@RequestBody AirPlaneDTO airPlaneDTO){
         AirPlaneDTO airPlaneDTO1=airplaneService.addAirplane(airPlaneDTO);
         return new ResponseEntity<AirPlaneDTO>(airPlaneDTO1, HttpStatus.CREATED);
     }
-    @PutMapping("/admin/update")
+    @PutMapping
     public ResponseEntity<AirPlaneDTO> updateAirPlane(@RequestBody AirPlaneDTO airPlaneDTO){
         AirPlaneDTO airPlaneDTO1=airplaneService.updateAirplane(airPlaneDTO);
         return new ResponseEntity<AirPlaneDTO>(airPlaneDTO1, HttpStatus.ACCEPTED);
     }
-    @GetMapping("/get")
+    @GetMapping("/{airPlaneNo}")
     public ResponseEntity<AirPlaneDTO> getAirPlane(@RequestParam String airPlaneNo){
         AirPlaneDTO airPlaneDTO=airplaneService.getAirPlane(airPlaneNo);
         return new ResponseEntity<AirPlaneDTO>(airPlaneDTO, HttpStatus.FOUND);
     }
-    @GetMapping("/get-all")
+    @GetMapping
     public ResponseEntity<List<AirPlaneDTO>> getAllAirPlane(){
         List<AirPlaneDTO> airPlaneDTOList=airplaneService.getAllAirPlanes();
         return new ResponseEntity<List<AirPlaneDTO>>(airPlaneDTOList, HttpStatus.FOUND);
     }
-    @PutMapping("/admin/delete")
+    @PutMapping("/{airPlaneNo}")
     public ResponseEntity<AirPlaneDTO> deleteAirPlane(@RequestParam String airPlaneNo){
         AirPlaneDTO airPlaneDTO=airplaneService.deleteAirplane(airPlaneNo);
         return new ResponseEntity<AirPlaneDTO>(airPlaneDTO,HttpStatus.OK);

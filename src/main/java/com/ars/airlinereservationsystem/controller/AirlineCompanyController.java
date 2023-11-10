@@ -10,34 +10,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/airline-company")
+@RequestMapping("/api/v1/airline-company")
 public class AirlineCompanyController {
     private final AirlineCompanyService airlineCompanyService;
     @Autowired
     AirlineCompanyController(AirlineCompanyService airlineCompanyService){
         this.airlineCompanyService=airlineCompanyService;
     }
-    @PostMapping("/admin/add")
+    @PostMapping
     private ResponseEntity<AirlineCompanyDTO> addAirlineCompany(@RequestBody AirlineCompanyDTO airlineCompanyDTO){
         AirlineCompanyDTO airlineCompanyDTO1=airlineCompanyService.addAirlineCompany(airlineCompanyDTO);
         return new ResponseEntity<AirlineCompanyDTO>(airlineCompanyDTO1, HttpStatus.CREATED);
     }
-    @GetMapping("/get")
-    public ResponseEntity<AirlineCompanyDTO> getAirlineCompany(@RequestParam String name){
+    @GetMapping("{name}")
+    public ResponseEntity<AirlineCompanyDTO> getAirlineCompany(@PathVariable String name){
         AirlineCompanyDTO airlineCompanyDTO=airlineCompanyService.getAirlineCompany(name);
         return new ResponseEntity<AirlineCompanyDTO>(airlineCompanyDTO,HttpStatus.FOUND);
     }
-    @DeleteMapping("/admin/delete")
-    public ResponseEntity<AirlineCompanyDTO> deleteAirlineCompany(@RequestParam String name){
+    @DeleteMapping("/{name}")
+    public ResponseEntity<AirlineCompanyDTO> deleteAirlineCompany(@PathVariable String name){
         AirlineCompanyDTO airlineCompanyDTO=airlineCompanyService.deleteAirlineCompany(name);
         return new ResponseEntity<AirlineCompanyDTO>(airlineCompanyDTO,HttpStatus.OK);
     }
-    @PutMapping("/admin/update")
+    @PutMapping
     public AirlineCompanyDTO updateAirlineCompany(@RequestBody AirlineCompanyDTO airlineCompanyDTO){
         AirlineCompanyDTO airlineCompanyDTO1=airlineCompanyService.updateAirlineCompany(airlineCompanyDTO);
         return new ResponseEntity<AirlineCompanyDTO>(airlineCompanyDTO1,HttpStatus.ACCEPTED).getBody();
     }
-    @GetMapping("/get-all")
+    @GetMapping
     public ResponseEntity<List<AirlineCompanyDTO>> getAllAirlineCompanies(){
         List<AirlineCompanyDTO> airlineCompanyDTOList=airlineCompanyService.getAllAirlineCompany();
         return new ResponseEntity<List<AirlineCompanyDTO>>(airlineCompanyDTOList,HttpStatus.FOUND);

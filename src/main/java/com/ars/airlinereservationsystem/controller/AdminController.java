@@ -9,14 +9,13 @@ import com.ars.airlinereservationsystem.security.auth.AuthenticationService;
 import com.ars.airlinereservationsystem.service.implementation.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api/v1/admins")
 public class AdminController {
     private final UserServiceImpl adminService;
     private final AuthenticationService authenticationService;
@@ -29,17 +28,16 @@ public class AdminController {
 
     @PostMapping
     public ResponseEntity<AuthenticationResponse> register(@RequestBody SignUpDTO request){
-        return ResponseEntity.ok(authenticationService.register(request));
-
-    }
-    @PostMapping
-    public ResponseEntity<AuthenticationResponse> login(@RequestBody SignInDTO request) {
         try {
-            return ResponseEntity.ok(authenticationService.authenticate(request));
+            return ResponseEntity.ok(authenticationService.register(request));
         }
-        catch (Exception ex){
-            throw new CustomControllerException(400,"");
+        catch (CustomControllerException e){
+            throw  new CustomControllerException(403,"Forbidden Request");
         }
+    }
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody SignInDTO request){
+        return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
     @GetMapping
@@ -48,7 +46,7 @@ public class AdminController {
         return new ResponseEntity<List<UserDTO>>(userDTOList,HttpStatus.FOUND);
     }
     @DeleteMapping("/{email}{password}")
-    public ResponseEntity<UserDTO> deleteUser(@RequestParam String email, @RequestParam String password){
+    public ResponseEntity<UserDTO> deleteUser(@PathVariable String email, @PathVariable String password){
         UserDTO userDTO=adminService.deleteUser(email,password);
         return new ResponseEntity<UserDTO>(userDTO,HttpStatus.ACCEPTED);
     }

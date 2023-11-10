@@ -31,15 +31,18 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse register(SignUpDTO request) {
-        if (request.getRole() == null || request.getName().isEmpty() || request.getEmail().isEmpty()
+        User user=userRepository.findUserByEmail(request.getEmail());
+        if(user!=null){
+            throw new CustomServiceException(200,"User is already Exist");
+        } else if(request.getRole() == null || request.getName().isEmpty() || request.getEmail().isEmpty()
                 || request.getPassword().isEmpty()) {
             throw new CustomServiceException(400, "Some Data is Missing");
         } else if (request.getGender() == null) {
             throw new CustomServiceException(400, "Some Data is Missing");
         }
-        User user = modelMapper.map(request, User.class);
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        User savedUser = userRepository.save(user);
+        User user1 = modelMapper.map(request, User.class);
+        user1.setPassword(passwordEncoder.encode(request.getPassword()));
+        User savedUser = userRepository.save(user1);
         String token = jwtService.generateToken(savedUser);
         SignUpDTO userDTO = modelMapper.map(savedUser, SignUpDTO.class);
         return AuthenticationResponse.builder()
